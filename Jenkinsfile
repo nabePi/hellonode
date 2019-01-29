@@ -33,4 +33,11 @@ node {
             app.push("latest")
         }
     }
+
+    stage('Run image') {
+        sh "docker login https://docker.staging.ktbs.io -u kitabisa -p kitabisa#12342019"
+        sh "docker pull getintodevops/hellonode"
+        sh "docker run -d --rm -p 8000:8000 --name hellonode getintodevops/hellonode:latest"
+        echo "Application started on port: 8000 (http)"
+    }
 }
